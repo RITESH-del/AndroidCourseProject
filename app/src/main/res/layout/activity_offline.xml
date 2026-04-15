@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient">
+    android:background="@drawable/offlinepage_gradient">
 
     <!-- Border Image -->
     <ImageView
@@ -32,7 +32,7 @@
 
     <!-- Heading -->
     <ImageView
-        android:id="@+id/heading"
+        android:id="@+id/offlineheading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/Heading1"
@@ -40,5 +40,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/offlineheading" />
+
+    <Button
+        android:id="@+id/offlineTryAgain"
+        android:layout_width="326dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#FF8C66"
+        android:text="Try Again"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+    <Button
+    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+    android:id="@+id/networkSetting"
+    android:layout_width="326dp"
+    android:layout_height="54dp"
+    android:layout_marginBottom="80dp"
+    android:text="Network Settings"
+    android:textAllCaps="false"
+    android:textColor="#C5A191"
+    app:backgroundTint="@android:color/transparent"
+    app:cornerRadius="100dp"
+    app:strokeColor="#4E342E"
+    app:strokeWidth="1dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/BackgroundAtmosphericElement"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="-16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
