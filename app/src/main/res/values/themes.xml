@@ -13,6 +13,17 @@
         <item name="colorOnSurfaceVariant">@color/glass_border</item>
     </style>
 
+<!--  Base Styles  -->
+    <style name="CircleImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RoundedButtonShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
 <!--    Splash Screen   -->
     <style name="SplashScreen" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/bg_splashscreen</item>
@@ -41,6 +52,8 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
+
+
 
     <style name="MyTextStyle.normal_text">
         <item name="android:textSize">18sp</item>
@@ -76,8 +89,11 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">18sp</item>
-        <item name="cornerRadius">10dp</item>
+        <item name="android:background">@drawable/btn_gradient</item>
+        <item name="shapeAppearanceOverlay">@style/RoundedButtonShape</item>
         <item name="android:paddingHorizontal">16dp</item>
+        <item name="backgroundTint">@null</item>
+        <item name="iconTint">@null</item>
         <item name="android:elevation">8dp</item>
         <item name="iconGravity">textEnd</item>
         <item name="iconPadding">4dp</item>
@@ -97,5 +113,14 @@
         <item name="iconSize">24dp</item>
     </style>
 
-
+<!--  ShapeableImageView  -->
+    <style name="MyImageViewStyle"
+        parent="Widget.MaterialComponents.ShapeableImageView">
+        <item name="shapeAppearanceOverlay">@style/CircleImage</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:scaleType">center</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+        <item name="strokeWidth">4dp</item>
+    </style>
 </resources>

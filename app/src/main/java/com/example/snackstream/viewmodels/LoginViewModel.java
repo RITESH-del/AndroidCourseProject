@@ -3,9 +3,7 @@ package com.example.snackstream.viewmodels;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 
 public class LoginViewModel extends ViewModel {
@@ -39,5 +37,8 @@ public class LoginViewModel extends ViewModel {
     public void onGoogleSignInClicked() {
         googleSignInEvent.setValue(true);
     }
+
+
+
 
 }
