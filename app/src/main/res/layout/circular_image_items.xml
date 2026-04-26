@@ -1,0 +1,25 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.snackstream.models.CircularImageModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        android:background="@android:color/transparent"
+        app:contentPadding="10dp">
+        <com.google.android.material.imageview.ShapeableImageView
+            style="@style/MyImageViewStyle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@{item.imageDescription}"
+            android:src="@{item.imageURI}" />
+    </androidx.cardview.widget.CardView>
+
+</layout>

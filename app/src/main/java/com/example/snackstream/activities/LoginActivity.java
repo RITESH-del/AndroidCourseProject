@@ -74,13 +74,20 @@ public class LoginActivity extends AppCompatActivity {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
+
+
         viewModel.isSuccess.observe(this, isSuccess ->{
             if(isSuccess){
                 Toast.makeText(this, "Authentication Successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, addPhotoActivity.class);
+                startActivity(intent);
+                finish();
             }else{
                 Toast.makeText(this, "Authentication Failed", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         viewModel.googleSignInEvent.observe(this, googleSignInEvent -> {
             if (googleSignInEvent) {
@@ -101,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         //[Start create_credential_manager_request]
         // Instantiate a Google sign-in request
        googleIdOption = new GetGoogleIdOption.Builder()
-                .setFilterByAuthorizedAccounts(true)
+                .setFilterByAuthorizedAccounts(false)
                 .setAutoSelectEnabled(true)
                 .setServerClientId(getString(R.string.default_web_client_id))
                 .build();
@@ -121,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+
     }
 
     private void launchCredentialManager() {
@@ -208,7 +216,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, addPhotoActivity.class);
             startActivity(intent);
         }
     }
