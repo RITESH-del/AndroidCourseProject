@@ -9,6 +9,75 @@
     android:background="#1F1E1E"
     tools:context=".activities.MainActivity">
 
+    <LinearLayout
+        android:id="@+id/topNav"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:background="#1F1E1E"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bites."
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <!-- Tabs -->
+        <TextView
+            android:id="@+id/tabFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Following"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/tabForYou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="For You"
+            android:textColor="#AAAAAA"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:layout_marginStart="12dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <!-- Search Icon -->
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_search"
+            app:tint="#FFFFFF"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+
 <!--    This is the container where fragment appears-->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host"

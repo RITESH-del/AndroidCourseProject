@@ -1,6 +1,7 @@
 package com.example.snackstream.activities;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.navView, (v, insets) -> {
             int bottomInset = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom;
             v.setPadding(
@@ -35,16 +38,37 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        //for testing
+        // for testing
         FirebaseAuth.getInstance().signOut();
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host);
+        NavHostFragment navHostFragment =
+                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host);
+
         if (navHostFragment != null) {
             NavController navController = navHostFragment.getNavController();
             NavigationUI.setupWithNavController(binding.navView, navController);
         }
 
+
+        // TOP NAVBAR CLICK HANDLING
+
+
+        binding.tabFollowing.setOnClickListener(v -> {
+            binding.tabFollowing.setTextColor(getResources().getColor(android.R.color.white));
+            binding.tabForYou.setTextColor(getResources().getColor(android.R.color.darker_gray));
+
+            Toast.makeText(this, "Following clicked", Toast.LENGTH_SHORT).show();
+        });
+
+        binding.tabForYou.setOnClickListener(v -> {
+            binding.tabForYou.setTextColor(getResources().getColor(android.R.color.white));
+            binding.tabFollowing.setTextColor(getResources().getColor(android.R.color.darker_gray));
+
+            Toast.makeText(this, "For You clicked", Toast.LENGTH_SHORT).show();
+        });
+
+        binding.btnSearch.setOnClickListener(v -> {
+            Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show();
+        });
     }
-
-
 }
