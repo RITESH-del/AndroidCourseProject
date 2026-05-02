@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/music"
+        android:icon="@drawable/music_ic"
+        android:title="Music"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/sticker"
+        android:icon="@drawable/sticker_ic"
+        android:title="Filter"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/text"
+        android:icon="@drawable/text_ic"
+        android:title="Text"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/draw"
+        android:icon="@drawable/draw_ic"
+        android:title="Draw"
+        android:background="@drawable/circular_btn"
+        app:showAsAction="always"/>
+</menu>

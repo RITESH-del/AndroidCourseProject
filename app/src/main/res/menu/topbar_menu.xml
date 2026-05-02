@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- For homeFragment -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/cart"
+        android:icon="@drawable/cart_ic"
+        android:title="cart"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/addStoryFragment"
+        android:icon="@drawable/add_story_ic"
+        android:title="add story"
+        app:showAsAction="always" />
+</menu>

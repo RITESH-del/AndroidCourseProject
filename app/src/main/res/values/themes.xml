@@ -4,6 +4,12 @@
 
     </style>
 
+    <style name="ThemeOverlay.SearchBar" parent="">
+        <item name="colorSurfaceContainerHigh">#2A2A2A</item>
+        <item name="colorSurfaceContainer">#1F1E1E</item>
+        <item name="colorOnSurface">#FFFFFF</item>
+    </style>
+
     <style name="Theme.SnackStream" parent="Base.Theme.SnackStream">
         <!-- Outline (unfocused) -->
         <item name="colorOutline">@color/glass_border</item>
@@ -13,10 +19,16 @@
         <item name="colorOnSurfaceVariant">@color/glass_border</item>
     </style>
 
+
 <!--  Base Styles  -->
     <style name="CircleImage">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ToolbarTitleBig" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">28sp</item>   <!-- increase as needed -->
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="RoundedButtonShape">

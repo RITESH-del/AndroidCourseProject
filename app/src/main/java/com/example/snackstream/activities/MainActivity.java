@@ -5,7 +5,9 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -13,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.snackstream.R;
 import com.example.snackstream.databinding.ActivityMainBinding;
+import com.example.snackstream.repository.UserRepository;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {

@@ -20,7 +20,6 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -94,7 +93,19 @@ dependencies {
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 
     // Import the BoM for the Firebase platform
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    // Glide
+    implementation("com.github.bumptech.glide:glide:5.0.7")
 
+    // Cloudinary cloud storage
+    implementation("com.cloudinary:cloudinary-android:3.1.2")
+    // Download + Preprocess:
+    implementation("com.cloudinary:cloudinary-android-download:3.1.2")
+    implementation("com.cloudinary:cloudinary-android-preprocess:3.1.2")
+
+    // for loading reels
+    implementation("androidx.media3:media3-exoplayer:1.3.1")
+    implementation("androidx.media3:media3-ui:1.3.1")
 
 }

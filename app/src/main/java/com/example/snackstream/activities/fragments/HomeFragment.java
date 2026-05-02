@@ -2,65 +2,150 @@ package com.example.snackstream.activities.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.snackstream.R;
+import com.example.snackstream.adapters.PostCardAdapter;
+import com.example.snackstream.adapters.StoryItemAdapter;
+import com.example.snackstream.databinding.FragmentHomeBinding;
+import com.example.snackstream.models.PostCardModel;
+import com.example.snackstream.models.SearchItemModel;
+import com.example.snackstream.models.StoryItemModel;
+import com.example.snackstream.repository.PostRepository;
+import com.example.snackstream.repository.SearchRepository;
+import com.example.snackstream.viewmodels.UserViewModel;
+import com.google.firebase.firestore.FieldValue;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class HomeFragment extends Fragment {
+        private FragmentHomeBinding binding;
+        private PostCardAdapter adapter = new PostCardAdapter();
+        private StoryItemAdapter storyAdapter = new StoryItemAdapter();
+        private String profileImageUrl;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+        private List<StoryItemModel> stories = new ArrayList<>();
+        private final PostRepository postRepository = PostRepository.getInstance();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        return binding.getRoot();
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        /* manual_top_bar_click_handling_start */
+        binding.topBar.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.addStoryFragment) {
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.addStoryFragment);
+                return true;
+            }
+
+            if (id == R.id.cart) {
+                // handle cart click
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.cartFragment);
+                return true;
+            }
+
+            return false;
+        });
+        /* manual_top_bar_click_handling_end */
+
+        binding.feedRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.feedRecycler.setAdapter(adapter);
+
+        binding.storiesRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.storiesRecycler.setAdapter(storyAdapter);
+
+        /* load_post_start */
+        postRepository.getPosts().observe(getViewLifecycleOwner(), posts -> {
+            if (posts != null) {
+                adapter.setList(posts);
+            }
+        });
+        postRepository.fetchPosts();
+        /* load_post_end */
+
+        // fetch user followers data
+        SearchRepository searchRepo = SearchRepository.getInstance();
+        searchRepo.fetchFollowing();
+
+        /* add_followers_start */
+        searchRepo.getFollowingIds().observe(getViewLifecycleOwner(), followingIds -> {
+
+            if (followingIds == null || followingIds.isEmpty()) return;
+
+            searchRepo.getUsersByIds(followingIds, users -> {
+
+                List<StoryItemModel> storyList = new ArrayList<>();
+                if (profileImageUrl != null) {
+                    storyList.add(new StoryItemModel("Your Story", profileImageUrl));
+                }
+                for (SearchItemModel user : users) {
+                    storyList.add(new StoryItemModel(
+                            user.getUsername(),
+                            user.getUserProfileImage()
+                    ));
+                }
+
+                storyAdapter.setList(storyList);
+            });
+        });
+        /* add_followers_end */
+
+
+        /* load_profile_image_start */
+//        UserViewModel viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+//
+//        viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
+//            Log.d("USER_DEBUG", String.valueOf(user));
+//            if (user != null) {
+//                Log.d("PROFILE_DEBUG", String.valueOf(user.profileImage));
+//                if (user.profileImage != null) {
+//                    profileImageUrl = user.profileImage;
+//                    if (!stories.isEmpty()) {
+//                        stories.set(0, new StoryItemModel("Your Story", profileImageUrl));
+//                    } else {
+//                        stories.add(0, new StoryItemModel("Your Story", profileImageUrl));
+//                    }
+//                }
+//            }
+//        });
+//        viewModel.fetchUser();
+        /* load_profile_image_end */
+
+        storyAdapter.setList(stories);
+
+    }
+
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
