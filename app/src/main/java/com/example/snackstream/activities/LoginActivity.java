@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import com.example.snackstream.R;
 import com.example.snackstream.databinding.ActivityLoginBinding;
+import com.example.snackstream.repository.UserRepository;
 import com.example.snackstream.viewmodels.LoginViewModel;
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption;
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential;
@@ -65,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
 
         // Data Binding
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
@@ -218,6 +221,7 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
             Intent intent = new Intent(this, addPhotoActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 

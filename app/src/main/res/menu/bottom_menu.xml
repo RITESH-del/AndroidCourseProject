@@ -11,6 +11,11 @@
         android:title="Search"/>
 
     <item
+        android:id="@+id/addStoryFragment"
+        android:icon="@drawable/add_story_ic"
+        android:title="Add Story"/>
+
+    <item
         android:id="@+id/reelsFragment"
         android:icon="@drawable/reels_ic"
         android:title="Reels"/>
