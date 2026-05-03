@@ -5,9 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.snackstream"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     buildFeatures {
         dataBinding = true
@@ -33,6 +31,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -40,32 +39,35 @@ android {
 }
 
 dependencies {
+
+    // ✅ Firebase BoM (must be first)
+    implementation(platform("com.google.firebase:firebase-bom:34.12.0"))
+
+    // Firebase (versions managed by BoM)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.firestore)
+
+    // Core Android
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.annotation)
+
+    // Lifecycle
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.firebase.auth)
+
+    // Google Sign-In / Credentials
     implementation(libs.credentials)
     implementation(libs.credentials.play.services.auth)
     implementation(libs.googleid)
+
+    // UI
     implementation(libs.cardview)
-    implementation(libs.firebase.storage)
-    implementation(libs.firebase.firestore)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-
-    // splash screen
     implementation("androidx.core:core-splashscreen:1.0.0")
-
-    // Lifecycle components
-    implementation("androidx.lifecycle:lifecycle-viewmodel:2.10.0")
-    implementation("androidx.lifecycle:lifecycle-livedata:2.10.0")
-    implementation("androidx.lifecycle:lifecycle-runtime:2.10.0")
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
 
     // Navigation
     implementation("androidx.navigation:navigation-fragment:2.9.7")
@@ -74,10 +76,7 @@ dependencies {
     // WorkManager
     implementation("androidx.work:work-runtime:2.11.2")
 
-    //RecyclerView
-    implementation("androidx.recyclerview:recyclerview:1.4.0")
-
-    // paging for infinite scroll
+    // Paging
     implementation("androidx.paging:paging-common-android:3.4.2")
     implementation("androidx.paging:paging-runtime:3.4.2")
 
@@ -85,16 +84,8 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.0")
     annotationProcessor("androidx.room:room-compiler:2.6.0")
 
-    // MDC
-    implementation("com.google.android.material:material:1.11.0")
-
-    // For credential Manager
-    implementation("androidx.credentials:credentials:1.3.0")
-    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
-    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
-
-    // Import the BoM for the Firebase platform
-
-
-
+    // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }

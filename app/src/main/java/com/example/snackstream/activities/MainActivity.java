@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        //for testing
-        FirebaseAuth.getInstance().signOut();
+        // Removed: FirebaseAuth.getInstance().signOut();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host);
         if (navHostFragment != null) {
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             NavigationUI.setupWithNavController(binding.navView, navController);
         }
 
-    }
+    } 
 
 
 }
