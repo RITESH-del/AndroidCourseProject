@@ -11,9 +11,9 @@
         android:title="Search"/>
 
     <item
-        android:id="@+id/addStoryFragment"
+        android:id="@+id/uploadReel"
         android:icon="@drawable/add_story_ic"
-        android:title="Add Story"/>
+        android:title="Upload Reels"/>
 
     <item
         android:id="@+id/reelsFragment"

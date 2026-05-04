@@ -50,7 +50,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         holder.binding.setItem(item);
         holder.binding.executePendingBindings();
 
-        // 🔥 Follow button handling
+        // Follow button handling
         holder.binding.btnFollow.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onFollowClick(item, position);
@@ -73,7 +73,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Vi
         return list != null ? list.size() : 0;
     }
 
-    // 🔌 Interface for click handling
+    // Interface for click handling
     public interface OnFollowClickListener {
         void onFollowClick(SearchItemModel item, int position);
     }

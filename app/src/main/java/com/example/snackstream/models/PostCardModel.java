@@ -1,5 +1,6 @@
 package com.example.snackstream.models;
 
+import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.PropertyName;
 
 public class PostCardModel {
@@ -12,6 +13,9 @@ public class PostCardModel {
     public String caption;
     public long timestamp;
     
+    @Exclude
+    public boolean isLiked;
+
     private int likes;
 
     public PostCardModel() {} // needed for Firestore

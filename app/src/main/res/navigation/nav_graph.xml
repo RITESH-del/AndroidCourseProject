@@ -39,11 +39,25 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.snackstream.activities.fragments.CartFragment"
-        android:label="Search"/>
+        android:label="cart"/>
+
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.example.snackstream.activities.fragments.CheckoutFragment"
+        android:label="Checkout">
+        <argument
+            android:name="totalAmount"
+            app:argType="float" />
+    </fragment>
 
     <fragment
         android:id="@+id/uploadReelFragment"
         android:name="com.example.snackstream.activities.fragments.UploadReelFragment"
-        android:label="Search"/>
+        android:label="Upload Reel">
+        <argument
+            android:name="videoUri"
+            app:argType="string" />
+    </fragment>
+
 
 </navigation>

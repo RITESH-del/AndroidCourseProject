@@ -1,26 +1,25 @@
 package com.example.snackstream.activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.snackstream.R;
 import com.example.snackstream.databinding.ActivityMainBinding;
-import com.example.snackstream.repository.UserRepository;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    private ActivityResultLauncher<String> videoPickerLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

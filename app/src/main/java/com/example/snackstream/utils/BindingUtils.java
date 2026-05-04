@@ -29,12 +29,5 @@ public class BindingUtils {
                 .into(view);
     }
 
-    @BindingAdapter("imageUrl")
-    public static void loadImage(ImageView view, List<String> urls) {
-        if (urls == null || urls.isEmpty()) {
-            loadImage(view, (String) null);
-        } else {
-            loadImage(view, urls.get(0));
-        }
-    }
+
 }
