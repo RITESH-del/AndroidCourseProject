@@ -23,4 +23,39 @@
     <!-- Text -->
     <color name="glass_text_primary">#FFFFFF</color>
     <color name="glass_text_secondary">#B3FFFFFF</color>
+
+    <resources>
+
+        <!-- ── Background Colors ── -->
+        <color name="bg_dark">#0E0A07</color>
+        <color name="surface_card">#1A1208</color>
+        <color name="surface_card2">#221908</color>
+        <color name="surface_card3">#2C2110</color>
+
+        <!-- ── Text Colors ── -->
+        <color name="text_primary">#F5EDDA</color>
+        <color name="text_secondary">#A89070</color>
+        <color name="text_muted">#6B5540</color>
+
+        <!-- ── Accent Colors ── -->
+        <color name="accent_red">#E84C2B</color>
+        <color name="accent_red_light">#26E84C2B</color>
+        <color name="accent_red_border">#33E84C2B</color>
+        <color name="accent_orange">#F4A340</color>
+        <color name="green_free">#3DAA6E</color>
+
+        <!-- ── UI Utility ── -->
+        <color name="divider_color">#12FFFFFF</color>
+        <color name="border_default">#12FFFFFF</color>
+        <color name="border_medium">#1FFFFFFF</color>
+
+        <!-- ── Checkout Gradient Start (for background) ── -->
+        <color name="checkout_gradient_top">#000E0A07</color>
+        <color name="checkout_gradient_bottom">#F00E0A07</color>
+
+    </resources>
+
+
+
+
 </resources>

@@ -1,116 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
-    app:cardBackgroundColor="#221A16"
+    android:layout_marginBottom="10dp"
+    app:cardBackgroundColor="#221410"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:orientation="horizontal"
+        android:padding="14dp"
+        android:gravity="top">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/itemImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+        <!-- Food Image -->
+        <ImageView
+            android:id="@+id/ivFoodImage"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:background="@drawable/bg_food_image"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+            android:src="@drawable/ic_food_placeholder"
+            android:contentDescription="Food Item"
+            android:layout_marginEnd="12dp" />
 
-        <TextView
-            android:id="@+id/itemName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="Spicy Salmon Roll"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/itemPrice"
-            app:layout_constraintStart_toEndOf="@id/itemImage"
-            app:layout_constraintTop_toTopOf="@id/itemImage" />
-
-        <TextView
-            android:id="@+id/itemPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$18.50"
-            android:textColor="#F48C33"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/itemName" />
-
-        <TextView
-            android:id="@+id/itemDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Extra ginger, no wasabi"
-            android:textColor="#8E8E8E"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@id/itemName"
-            app:layout_constraintStart_toStartOf="@id/itemName"
-            app:layout_constraintTop_toBottomOf="@id/itemName" />
-
+        <!-- Item Details -->
         <LinearLayout
-            android:id="@+id/quantityContainer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_quantity_control"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/itemName"
-            app:layout_constraintTop_toBottomOf="@id/itemDescription">
-
-            <ImageView
-                android:id="@+id/btnMinus"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/bg_circle_dark"
-                android:padding="4dp"
-                android:src="@drawable/ic_minus"
-                app:tint="#8E8E8E" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvQuantity"
-                android:layout_width="32dp"
+                android:id="@+id/tvItemName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="2"
-                android:textColor="#FFFFFF"
+                android:text="Double Truffle Burger"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/syne_semibold"
+                android:textStyle="bold"
+                android:lineSpacingMultiplier="1.2" />
 
-            <ImageView
-                android:id="@+id/btnPlus"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/bg_circle_orange"
-                android:padding="4dp"
-                android:src="@drawable/ic_add"
-                app:tint="#FFFFFF" />
+            <TextView
+                android:id="@+id/tvItemDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Extra caramelized onions, no pickles"
+                android:textColor="@color/text_muted"
+                android:textSize="12sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="1.3" />
+
+            <!-- Quantity + Price Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical">
+
+                <!-- Quantity Control -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_qty_control"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/btnDecrease"
+                        android:layout_width="32dp"
+                        android:layout_height="30dp"
+                        android:text="−"
+                        android:textColor="@color/accent_red"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/dm_sans_semibold"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+
+                    <TextView
+                        android:id="@+id/tvQuantity"
+                        android:layout_width="26dp"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/syne_semibold"
+                        android:textStyle="bold"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/btnIncrease"
+                        android:layout_width="32dp"
+                        android:layout_height="30dp"
+                        android:text="+"
+                        android:textColor="@color/accent_red"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/dm_sans_semibold"
+                        android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <!-- Item Price -->
+                <TextView
+                    android:id="@+id/tvItemPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$18.50"
+                    android:textColor="@color/accent_orange"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/syne_bold"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <ImageView
+        <!-- Delete Button -->
+        <ImageButton
             android:id="@+id/btnDelete"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_delete_button"
             android:src="@drawable/ic_delete"
-            app:layout_constraintBottom_toBottomOf="@id/quantityContainer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/quantityContainer"
-            app:tint="#4D4D4D" />
+            android:tint="@color/accent_red"
+            android:contentDescription="Remove item"
+            android:padding="6dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
 </androidx.cardview.widget.CardView>

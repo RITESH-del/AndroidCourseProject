@@ -9,7 +9,71 @@
     android:background="#1F1E1E"
     tools:context=".activities.MainActivity">
 
-<!--    This is the container where fragment appears-->
+    <LinearLayout
+        android:id="@+id/topNav"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:background="#1F1E1E"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bites."
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tabFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Following"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/tabForYou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="For You"
+            android:textColor="#F6F2F2"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:layout_marginStart="12dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/btnSearch"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_search"
+            app:tint="#FFFFFF"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+
+    <!-- Fragment Container -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host"
         android:layout_height="0dp"
@@ -22,6 +86,7 @@
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:navGraph="@navigation/nav_graph" />
 
+    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
@@ -36,7 +101,100 @@
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu" />
+
+
+    <FrameLayout
+        android:id="@+id/cartContainer"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/bg_cart"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:translationY="30dp">
+
+        <ImageView
+            android:id="@+id/btnCart"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:src="@drawable/cartcontainer"
+            app:tint="#FFFFFF"/>
+    </FrameLayout>
+
+    <!-- ✅ Right Side Actions (ADDED) -->
+    <LinearLayout
+        android:id="@+id/rightActions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Profile -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Like -->
+        <ImageView
+            android:id="@+id/btnLike"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_favorite"
+            app:tint="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/tvLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12.4K"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Comment -->
+        <ImageView
+            android:id="@+id/btnComment"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/comment"
+            app:tint="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/tvComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="842"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Share -->
+        <ImageView
+            android:id="@+id/btnShare"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/share"
+            app:tint="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/tvShares"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="142"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
