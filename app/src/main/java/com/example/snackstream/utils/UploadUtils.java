@@ -73,4 +73,63 @@ public class UploadUtils {
                 })
                 .dispatch();
     }
+
+    public static void uploadReel(Uri videoUri, String reelId, UploadCallbackListener listener) {
+
+        MediaManager.get().upload(videoUri)
+                .option("resource_type", "video")
+                .option("folder", "reels")             // organize in Cloudinary
+                .option("public_id", "reels/" + reelId)
+                .option("overwrite", true)
+
+                // 🔥 Optimization (VERY IMPORTANT for reels)
+                .option("quality", "auto")
+                .option("fetch_format", "auto")
+
+                .callback(new UploadCallback() {
+
+                    @Override
+                    public void onStart(String requestId) {
+                        Log.d("REEL_UPLOAD", "Upload started");
+                    }
+
+                    @Override
+                    public void onProgress(String requestId, long bytes, long totalBytes) {
+                        int progress = (int) ((bytes * 100) / totalBytes);
+                        Log.d("REEL_UPLOAD", "Progress: " + progress + "%");
+                    }
+
+                    @Override
+                    public void onSuccess(String requestId, Map resultData) {
+
+                        String videoUrl = resultData.get("secure_url").toString();
+
+                        // 🔥 Thumbnail generation
+                        String thumbnailUrl;
+                        if (resultData.get("thumbnail_url") != null) {
+                            thumbnailUrl = resultData.get("thumbnail_url").toString();
+                        } else {
+                            // fallback: Cloudinary auto thumbnail
+                            thumbnailUrl = videoUrl + ".jpg";
+                        }
+
+                        Log.d("REEL_UPLOAD", "Success");
+
+                        // 🔥 You can extend listener if needed
+                        listener.onSuccess(videoUrl);
+                    }
+
+                    @Override
+                    public void onError(String requestId, ErrorInfo error) {
+                        Log.e("REEL_UPLOAD", error.getDescription());
+                        listener.onError(error.getDescription());
+                    }
+
+                    @Override
+                    public void onReschedule(String requestId, ErrorInfo error) {
+                        Log.d("REEL_UPLOAD", "Rescheduled");
+                    }
+                })
+                .dispatch();
+    }
 }

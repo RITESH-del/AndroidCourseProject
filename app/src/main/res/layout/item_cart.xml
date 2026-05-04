@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardBackgroundColor="#221A16"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/itemImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Spicy Salmon Roll"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/itemPrice"
+            app:layout_constraintStart_toEndOf="@id/itemImage"
+            app:layout_constraintTop_toTopOf="@id/itemImage" />
+
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$18.50"
+            android:textColor="#F48C33"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/itemName" />
+
+        <TextView
+            android:id="@+id/itemDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Extra ginger, no wasabi"
+            android:textColor="#8E8E8E"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/itemName"
+            app:layout_constraintStart_toStartOf="@id/itemName"
+            app:layout_constraintTop_toBottomOf="@id/itemName" />
+
+        <LinearLayout
+            android:id="@+id/quantityContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_quantity_control"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/itemName"
+            app:layout_constraintTop_toBottomOf="@id/itemDescription">
+
+            <ImageView
+                android:id="@+id/btnMinus"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bg_circle_dark"
+                android:padding="4dp"
+                android:src="@drawable/ic_minus"
+                app:tint="#8E8E8E" />
+
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btnPlus"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bg_circle_orange"
+                android:padding="4dp"
+                android:src="@drawable/ic_add"
+                app:tint="#FFFFFF" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="@id/quantityContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/quantityContainer"
+            app:tint="#4D4D4D" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

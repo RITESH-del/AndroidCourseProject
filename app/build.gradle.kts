@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
+
 }
 
 android {
@@ -79,6 +80,10 @@ dependencies {
     // paging for infinite scroll
     implementation("androidx.paging:paging-common-android:3.4.2")
     implementation("androidx.paging:paging-runtime:3.4.2")
+    implementation("androidx.paging:paging-runtime-ktx:3.4.2")
+    implementation("androidx.paging:paging-guava:3.4.2")
+    implementation("androidx.concurrent:concurrent-futures:1.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
     // Room
     implementation("androidx.room:room-runtime:2.6.0")
@@ -107,5 +112,6 @@ dependencies {
     // for loading reels
     implementation("androidx.media3:media3-exoplayer:1.3.1")
     implementation("androidx.media3:media3-ui:1.3.1")
+
 
 }

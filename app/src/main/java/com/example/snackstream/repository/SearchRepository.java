@@ -1,6 +1,7 @@
 package com.example.snackstream.repository;
 
 
+import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.snackstream.models.SearchItemModel;
@@ -21,8 +22,11 @@ public class SearchRepository {
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
 
     private final MutableLiveData<List<SearchItemModel>> usersLiveData = new MutableLiveData<>();
-    private final MutableLiveData<List<String>> followingIdsLiveData = new MutableLiveData<>();
-    private final MutableLiveData<List<String>> followersIdsLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<String>> followingIdsLiveData = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<List<String>> followersIdsLiveData = new MutableLiveData<>(new ArrayList<>());
+    
+    private ListenerRegistration followingListener;
+    private ListenerRegistration followersListener;
 
     public MutableLiveData<List<String>> getFollowersIds() {
         return followersIdsLiveData;
@@ -68,53 +72,52 @@ public class SearchRepository {
 
     //  FETCH FOLLOWING LIST (for UI state)
     public void fetchFollowing() {
+        if (auth.getCurrentUser() == null) return;
+        if (followingListener != null) return; // 🔥 Avoid duplicate listeners
 
         String currentUserId = auth.getCurrentUser().getUid();
 
-        db.collection("following")
+        followingListener = db.collection("following")
                 .document(currentUserId)
                 .collection("userFollowing")
                 .addSnapshotListener((snapshot, error) -> {
-
                     if (snapshot == null) return;
 
                     List<String> ids = new ArrayList<>();
-
                     for (DocumentSnapshot doc : snapshot.getDocuments()) {
                         ids.add(doc.getId());
                     }
-
                     followingIdsLiveData.setValue(ids);
                 });
     }
 
     public void fetchFollowers() {
+        if (auth.getCurrentUser() == null) return;
+        if (followersListener != null) return; // 🔥 Avoid duplicate listeners
 
         String currentUserId = auth.getCurrentUser().getUid();
 
-        db.collection("followers")
+        followersListener = db.collection("followers")
                 .document(currentUserId)
                 .collection("userFollowers")
                 .addSnapshotListener((snapshot, error) -> {
-
                     if (snapshot == null) return;
 
                     List<String> ids = new ArrayList<>();
-
                     for (DocumentSnapshot doc : snapshot.getDocuments()) {
                         ids.add(doc.getId());
                     }
-
                     followersIdsLiveData.setValue(ids);
                 });
     }
 
     // FOLLOW USER
     public void followUser(String targetUserId) {
-
+        if (auth.getCurrentUser() == null || targetUserId == null || targetUserId.isEmpty()) {
+            return;
+        }
+        
         String currentUserId = auth.getCurrentUser().getUid();
-
-        // Check
         if (currentUserId.equals(targetUserId)) return;
 
         WriteBatch batch = db.batch();
@@ -129,17 +132,23 @@ public class SearchRepository {
                 .collection("userFollowers")
                 .document(currentUserId);
 
+        DocumentReference targetUserRef = db.collection("users").document(targetUserId);
+
         Map<String, Object> data = new HashMap<>();
         data.put("timestamp", FieldValue.serverTimestamp());
 
         batch.set(followingRef, data);
         batch.set(followersRef, data);
+        batch.update(targetUserRef, "followers", FieldValue.increment(1));
 
-        batch.commit();
+        batch.commit()
+                .addOnSuccessListener(aVoid -> Log.d("SearchRepo", "Followed " + targetUserId))
+                .addOnFailureListener(e -> Log.e("SearchRepo", "Follow failed", e));
     }
 
     //  UNFOLLOW USER
     public void unfollowUser(String targetUserId) {
+        if (auth.getCurrentUser() == null || targetUserId == null) return;
         String currentUserId = auth.getCurrentUser().getUid();
 
         WriteBatch batch = db.batch();
@@ -153,17 +162,19 @@ public class SearchRepository {
                 .document(targetUserId)
                 .collection("userFollowers")
                 .document(currentUserId);
+                
+        DocumentReference targetUserRef = db.collection("users").document(targetUserId);
 
         batch.delete(followingRef);
         batch.delete(followersRef);
+        batch.update(targetUserRef, "followers", FieldValue.increment(-1));
 
-        batch.commit();
+        batch.commit()
+                .addOnSuccessListener(aVoid -> Log.d("SearchRepo", "Unfollowed " + targetUserId))
+                .addOnFailureListener(e -> Log.e("SearchRepo", "Unfollow failed", e));
     }
 
-
-
     public void getUsersByIds(List<String> ids, OnUsersFetchedListener listener) {
-
         if (ids == null || ids.isEmpty()) {
             listener.onFetched(new ArrayList<>());
             return;

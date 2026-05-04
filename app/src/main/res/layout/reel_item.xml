@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.snackstream.models.ReelModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
+
+        <!-- Video -->
+        <androidx.media3.ui.PlayerView
+            android:id="@+id/playerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:use_controller="false"
+            app:resize_mode="zoom"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Play Icon -->
+        <ImageView
+            android:id="@+id/playIcon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/play_ic"
+            android:visibility="gone"
+            app:tint="@android:color/white"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Loader -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:visibility="gone"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Bottom-left info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rightActions">
+
+            <!-- Profile + username + follow -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:imageUrl="@{item.userProfileImage}" />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@{item.username}"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    tools:text="ritesh_kumar"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFollow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="12dp"
+                    android:text="Follow"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:paddingHorizontal="12dp"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/bg_glass_button"
+                    app:cornerRadius="16dp"
+                    app:icon="@drawable/ic_add"
+                    app:iconSize="14dp"
+                    app:iconGravity="textStart"
+                    app:iconTint="@android:color/white"
+                    app:iconPadding="4dp"
+                    app:strokeWidth="0dp" />
+            </LinearLayout>
+
+            <!-- Caption -->
+            <TextView
+                android:id="@+id/caption"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@{item.caption}"
+                android:textColor="@android:color/white"
+                android:maxLines="2"
+                android:ellipsize="end"
+                tools:text="Check out this amazing food! #snackstream"/>
+        </LinearLayout>
+
+        <!-- Right side actions -->
+        <LinearLayout
+            android:id="@+id/rightActions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="bottom|center_horizontal"
+            android:padding="12dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/likeBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/like_ic"
+                app:tint="@drawable/like_selector"/>
+
+            <TextView
+                android:id="@+id/likeCount"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@{String.valueOf(item.likes)}"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                tools:text="1.2k"/>
+
+            <ImageView
+                android:id="@+id/commentBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/comment_ic"
+                app:tint="@android:color/white"/>
+
+            <ImageView
+                android:id="@+id/shareBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/share_ic"
+                app:tint="@android:color/white"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

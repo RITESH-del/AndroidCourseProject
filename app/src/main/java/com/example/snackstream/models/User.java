@@ -5,6 +5,10 @@ public class User {
     public String username;
     public String email;
     public String fullname;
+    public String bio;
+    public long followers;
+    public long saved;
+    public long orders;
 
     // 🔥 REQUIRED for Firestore
     public User() {}

@@ -33,13 +33,12 @@ public class AddStoryFragment extends Fragment {
     private final PostRepository postRepository = PostRepository.getInstance();
     private final UserRepository userRepository = UserRepository.getInstance();
 
-    // 🔥 Single image picker
+    // Single image picker
     private final ActivityResultLauncher<PickVisualMediaRequest> pickImageLauncher =
             registerForActivityResult(
                     new ActivityResultContracts.PickVisualMedia(),
                     uri -> {
                         if (uri != null) {
-                            // ✅ You got the image
                             selectedImageUri = uri;
                             // Show preview
                             binding.storyImage.setImageURI(uri);

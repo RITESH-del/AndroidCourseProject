@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="totalAmount"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0F090B">
+
+        <!-- Top Bar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bg_circle_dark"
+                android:backgroundTint="#2D1A1E"
+                android:padding="8dp"
+                android:src="@drawable/arrow_back_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#FF5722" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Checkout"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@id/bottomBar"
+            app:layout_constraintTop_toBottomOf="@id/topBar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Delivery Address Header -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DELIVERY ADDRESS"
+                        android:textColor="#5C423D"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btnChangeAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="Change"
+                        android:textColor="#FF5722"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <!-- Address Card -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_profile_card"
+                    android:backgroundTint="#1D1114"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/icHome"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_profile_card"
+                        android:backgroundTint="#2D1A1E"
+                        android:padding="12dp"
+                        android:src="@drawable/home_ic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#FF5722" />
+
+                    <TextView
+                        android:id="@+id/tvAddressLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Home"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/icHome"
+                        app:layout_constraintTop_toTopOf="@id/icHome" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/circular_btn"
+                        android:backgroundTint="#3D201A"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="2dp"
+                        android:text="DEFAULT"
+                        android:textColor="#FF5722"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/tvAddressLabel"
+                        app:layout_constraintStart_toEndOf="@id/tvAddressLabel"
+                        app:layout_constraintTop_toTopOf="@id/tvAddressLabel" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="452 West 19th St, Apt 4B, Chelsea, \nNew York, NY 10011"
+                        android:textColor="#8E8E8E"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tvAddressLabel"
+                        app:layout_constraintTop_toBottomOf="@id/tvAddressLabel" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Estimated Delivery -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_profile_card"
+                    android:backgroundTint="#1D1114"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/icTime"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_launcher_foreground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#FF5722" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="Estimated Delivery"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/icTime"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="25 - 35 mins"
+                        android:textColor="#FF5722"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Payment Options Header -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="PAYMENT OPTIONS"
+                    android:textColor="#5C423D"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <!-- UPI Option -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/optionUPI"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_profile_card"
+                    android:backgroundTint="#1D1114"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/icUPI"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_profile_card"
+                        android:backgroundTint="#2D1A1E"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_launcher_foreground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#FF5722" />
+
+                    <TextView
+                        android:id="@+id/tvUPILabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="UPI Payments"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/icUPI"
+                        app:layout_constraintTop_toTopOf="@id/icUPI" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Google Pay, PhonePe, etc."
+                        android:textColor="#8E8E8E"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@id/tvUPILabel"
+                        app:layout_constraintTop_toBottomOf="@id/tvUPILabel" />
+
+                    <RadioButton
+                        android:id="@+id/rbUPI"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#FF5722"
+                        android:checked="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Card Option -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/optionCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_profile_card"
+                    android:backgroundTint="#1D1114"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/icCard"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_profile_card"
+                        android:backgroundTint="#2D1A1E"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_launcher_foreground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#FF5722" />
+
+                    <TextView
+                        android:id="@+id/tvCardLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Credit / Debit Card"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/icCard"
+                        app:layout_constraintTop_toTopOf="@id/icCard" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Visa, Mastercard, Amex"
+                        android:textColor="#8E8E8E"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@id/tvCardLabel"
+                        app:layout_constraintTop_toBottomOf="@id/tvCardLabel" />
+
+                    <RadioButton
+                        android:id="@+id/rbCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#FF5722"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- COD Option -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/optionCOD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_profile_card"
+                    android:backgroundTint="#1D1114"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/icCOD"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_profile_card"
+                        android:backgroundTint="#2D1A1E"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_launcher_foreground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#FF5722" />
+
+                    <TextView
+                        android:id="@+id/tvCODLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Cash on Delivery"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/icCOD"
+                        app:layout_constraintTop_toTopOf="@id/icCOD" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pay when you receive"
+                        android:textColor="#8E8E8E"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@id/tvCODLabel"
+                        app:layout_constraintTop_toBottomOf="@id/tvCODLabel" />
+
+                    <RadioButton
+                        android:id="@+id/rbCOD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#FF5722"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Bottom Bar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1D1114"
+            android:padding="20dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/tvPayableLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PAYABLE"
+                android:textColor="#8E8E8E"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPayableAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{totalAmount}"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPayableLabel"
+                tools:text="$28.93" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/tvPayableAmount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvPayableLabel">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_launcher_foreground"
+                    app:tint="#8E8E8E" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Secure Payment"
+                    android:textColor="#8E8E8E"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPlaceOrder"
+                style="@style/MyButtonStyle.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#FF5722"
+                android:text="PLACE ORDER"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/arrow_right_ic"
+                app:iconGravity="textEnd"
+                app:layout_constraintTop_toBottomOf="@id/tvPayableAmount" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
